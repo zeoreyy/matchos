@@ -250,8 +250,20 @@ export function InsuranceMap({
         </div>
       </div>
 
+      {/* Reconstruction note */}
+      {analysis.reconstruction_note && (
+        <div className="flex items-start gap-3 rounded-xl border border-border bg-surface/60 p-4">
+          <Wand2 className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
+          <div>
+            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Profile reconstruction</p>
+            <p className="mt-0.5 text-sm text-foreground/90">{analysis.reconstruction_note}</p>
+          </div>
+        </div>
+      )}
+
       {/* Financial */}
       <FinancialBlock a={analysis} />
+
 
       {/* Policies */}
       <section>
