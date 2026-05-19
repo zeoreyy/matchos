@@ -16,6 +16,8 @@ import {
   FileSearch,
   Activity,
   Layers,
+  Wand2,
+  TrendingDown,
 } from "lucide-react";
 
 const CAT_META: Record<InsuranceCategory, { label: string; Icon: any; tint: string }> = {
