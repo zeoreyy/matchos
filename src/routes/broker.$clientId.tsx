@@ -14,6 +14,20 @@ export const Route = createFileRoute("/broker/$clientId")({
   component: BrokerClient,
 });
 
+function sourceLabel(d: { name?: string; type?: string }) {
+  const n = (d?.name ?? "").toLowerCase();
+  const t = (d?.type ?? "").toLowerCase();
+  if (n.includes("whatsapp")) return "WhatsApp screenshot";
+  if (n.includes("renewal")) return "Renewal notice";
+  if (n.includes("receipt") || n.includes("payment")) return "Payment receipt";
+  if (n.includes("email") || n.endsWith(".eml")) return "Email";
+  if (n.includes("scan") || n.includes("contract")) return "Scanned contract";
+  if (t.startsWith("image/")) return "Photo / screenshot";
+  if (t.includes("pdf")) return "PDF policy";
+  return d?.name ?? "Document";
+}
+
+
 function BrokerClient() {
   const { clientId } = useParams({ from: "/broker/$clientId" });
   const fn = useServerFn(getClient);
@@ -52,14 +66,17 @@ function BrokerClient() {
                   <Mail className="h-3.5 w-3.5" /> {data.email}
                 </p>
               </div>
-              <div className="flex gap-2">
-                <span className="rounded-full border border-border bg-surface px-3 py-1.5 text-[11px] text-muted-foreground">
-                  {(data.documents as any[])?.length ?? 0} documents
-                </span>
-                <span className="rounded-full border border-border bg-surface px-3 py-1.5 text-[11px] text-muted-foreground">
+              <div className="flex flex-wrap gap-2">
+                {((data.documents as any[]) ?? []).slice(0, 6).map((d: any, i: number) => (
+                  <span key={i} className="rounded-full border border-border bg-surface px-2.5 py-1 text-[10px] text-muted-foreground">
+                    {sourceLabel(d)}
+                  </span>
+                ))}
+                <span className="rounded-full border border-border bg-surface px-2.5 py-1 text-[10px] text-muted-foreground">
                   Updated {new Date(data.updated_at).toLocaleDateString()}
                 </span>
               </div>
+
             </header>
             <InsuranceMap analysis={data.analysis as unknown as InsuranceAnalysis} variant="broker" />
           </>

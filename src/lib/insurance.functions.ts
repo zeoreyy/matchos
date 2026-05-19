@@ -36,14 +36,18 @@ Rules:
 - risk_score: 0-100 where higher means more uncovered exposure.
 - opportunity_score: 0-100 where higher means more cross-sell / upsell potential.
 - "source_documents" must contain document filenames you actually used.
+- Always return a "reconstruction_note" (1 sentence) describing how the profile was reconstructed from the uploads (e.g., "AI reconstructed this profile from 7 fragmented uploads including PDFs, screenshots and a renewal notice.").
+- Always populate "premium_optimization" with 1-4 soft, suggestive items. Use cautious language ("possible", "appears", "may"). Never claim exact savings or real-time benchmarks. Valid signals: rising_premium, outdated_policy, fragmented_providers, duplicate_spend, loyalty_inflation, other.
 - Even if documents are unclear, produce your best-effort structured map.`;
 
 const TOOL_SCHEMA = {
   type: "object" as const,
   properties: {
     summary_plain_english: { type: "string" },
+    reconstruction_note: { type: "string" },
     risk_score: { type: "number" },
     opportunity_score: { type: "number" },
+
     policies: {
       type: "array",
       items: {
@@ -116,6 +120,23 @@ const TOOL_SCHEMA = {
         required: ["title", "detail", "priority"],
       },
     },
+    premium_optimization: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          detail: { type: "string" },
+          category: { type: "string" },
+          signal: {
+            type: "string",
+            enum: ["rising_premium", "outdated_policy", "fragmented_providers", "duplicate_spend", "loyalty_inflation", "other"],
+          },
+        },
+        required: ["title", "detail"],
+      },
+    },
+
     financial: {
       type: "object",
       properties: {
