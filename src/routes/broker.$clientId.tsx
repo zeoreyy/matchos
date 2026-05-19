@@ -14,6 +14,20 @@ export const Route = createFileRoute("/broker/$clientId")({
   component: BrokerClient,
 });
 
+function sourceLabel(d: { name?: string; type?: string }) {
+  const n = (d?.name ?? "").toLowerCase();
+  const t = (d?.type ?? "").toLowerCase();
+  if (n.includes("whatsapp")) return "WhatsApp screenshot";
+  if (n.includes("renewal")) return "Renewal notice";
+  if (n.includes("receipt") || n.includes("payment")) return "Payment receipt";
+  if (n.includes("email") || n.endsWith(".eml")) return "Email";
+  if (n.includes("scan") || n.includes("contract")) return "Scanned contract";
+  if (t.startsWith("image/")) return "Photo / screenshot";
+  if (t.includes("pdf")) return "PDF policy";
+  return d?.name ?? "Document";
+}
+
+
 function BrokerClient() {
   const { clientId } = useParams({ from: "/broker/$clientId" });
   const fn = useServerFn(getClient);
