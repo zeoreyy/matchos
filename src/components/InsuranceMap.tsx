@@ -300,7 +300,7 @@ export function InsuranceMap({
               analysis.overlaps.map((o, i) => (
                 <li key={i} className="rounded-lg border border-border bg-card p-3">
                   <div className="flex items-center justify-between">
-                  <div className="flex items-center justify-between">
+
                     <p className="text-sm font-medium">{o.title}</p>
                     {o.estimated_waste_eur != null && (
                       <span className="font-mono text-[11px] text-muted-foreground">
