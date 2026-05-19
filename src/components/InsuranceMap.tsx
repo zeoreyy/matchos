@@ -306,7 +306,38 @@ export function InsuranceMap({
                         ~{Math.round(o.estimated_waste_eur)} €/mo
                       </span>
                     )}
-                  </div>
+      </div>
+
+      {/* Premium optimization */}
+      {analysis.premium_optimization && analysis.premium_optimization.length > 0 && (
+        <section>
+          <SectionHead
+            icon={TrendingDown}
+            title="Premium optimization"
+            count={analysis.premium_optimization.length}
+            hint="AI-suggested — not market pricing"
+          />
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {analysis.premium_optimization.map((o, i) => (
+              <li key={i} className="rounded-lg border border-border bg-card p-3 shadow-soft">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-sm font-medium">{o.title}</p>
+                  {o.signal && (
+                    <span className="rounded-full border border-border bg-surface px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                      {o.signal.replace(/_/g, " ")}
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1 text-xs text-foreground/80">{o.detail}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-[11px] text-muted-foreground">
+            Suggestive only — no real-time market benchmarking. A broker review is recommended.
+          </p>
+        </section>
+      )}
+
                   <p className="mt-1 text-xs text-foreground/80">{o.detail}</p>
                 </li>
               ))
