@@ -120,6 +120,23 @@ const TOOL_SCHEMA = {
         required: ["title", "detail", "priority"],
       },
     },
+    premium_optimization: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          detail: { type: "string" },
+          category: { type: "string" },
+          signal: {
+            type: "string",
+            enum: ["rising_premium", "outdated_policy", "fragmented_providers", "duplicate_spend", "loyalty_inflation", "other"],
+          },
+        },
+        required: ["title", "detail"],
+      },
+    },
+
     financial: {
       type: "object",
       properties: {
