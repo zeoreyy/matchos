@@ -49,18 +49,28 @@ export interface BrokerOpportunity {
   category?: InsuranceCategory;
 }
 
+export interface PremiumOptimization {
+  title: string;
+  detail: string;
+  category?: InsuranceCategory;
+  signal?: "rising_premium" | "outdated_policy" | "fragmented_providers" | "duplicate_spend" | "loyalty_inflation" | "other";
+}
+
 export interface InsuranceAnalysis {
   summary_plain_english: string;
+  reconstruction_note?: string | null;
   policies: InsurancePolicy[];
   risk_gaps: RiskGap[];
   overlaps: Overlap[];
   missing_information: MissingInfo[];
   broker_opportunities: BrokerOpportunity[];
+  premium_optimization?: PremiumOptimization[];
   financial: {
     estimated_monthly_total_eur?: number | null;
     upcoming_renewals_30d: number;
-    distribution: Record<string, number>; // category -> approx % of spend
+    distribution: Record<string, number>;
   };
+
   risk_score: number; // 0-100 (higher = more exposure)
   opportunity_score: number; // 0-100 (higher = more upsell potential)
   document_timeline: { document: string; date?: string | null; type?: string | null; note?: string | null }[];
