@@ -9,11 +9,12 @@ export const Route = createFileRoute("/broker")({
   head: () => ({
     meta: [
       { title: "Broker workspace — Polis/AI" },
-      { name: "description", content: "Every uploaded client portfolio, structured and ready to act on." },
+      { name: "description", content: "AI-reconstructed client portfolios with opportunity, gap and renewal intelligence." },
     ],
   }),
   component: BrokerHome,
 });
+
 
 function ScoreBar({ value, tone }: { value: number | null; tone: "risk" | "opp" }) {
   const v = Math.max(0, Math.min(100, value ?? 0));
