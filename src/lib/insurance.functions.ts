@@ -44,8 +44,10 @@ const TOOL_SCHEMA = {
   type: "object" as const,
   properties: {
     summary_plain_english: { type: "string" },
+    reconstruction_note: { type: "string" },
     risk_score: { type: "number" },
     opportunity_score: { type: "number" },
+
     policies: {
       type: "array",
       items: {
