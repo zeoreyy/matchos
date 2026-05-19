@@ -53,8 +53,9 @@ function DashboardPage() {
                 Hi {data.name.split(" ")[0]} — here's what we found.
               </h1>
               <p className="mt-2 text-sm text-muted-foreground">
-                Built from {(data.documents as any[])?.length ?? 0} uploaded artifacts. Confidence shown per coverage.
+                AI reconstructed your insurance profile from {(data.documents as any[])?.length ?? 0} fragmented upload{((data.documents as any[])?.length ?? 0) === 1 ? "" : "s"}. Confidence shown per coverage.
               </p>
+
             </header>
             <InsuranceMap analysis={data.analysis as unknown as InsuranceAnalysis} variant="consumer" />
           </>
