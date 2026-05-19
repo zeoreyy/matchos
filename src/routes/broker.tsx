@@ -43,12 +43,13 @@ function BrokerHome() {
       <main className="mx-auto max-w-6xl px-6 py-10">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Broker workspace</p>
+            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Lead intelligence</p>
             <h1 className="mt-1 font-display text-4xl tracking-tight sm:text-5xl">Client portfolios</h1>
             <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-              Each consumer upload becomes a structured insurance intelligence profile — opportunities, gaps and renewals at a glance.
+              Every consumer upload becomes a structured insurance profile — opportunity score, renewal radar, premium optimization and missing-coverage signals at a glance.
             </p>
           </div>
+
           <div className="hidden sm:flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-[11px] text-muted-foreground">
             <Users className="h-3.5 w-3.5" />
             {data?.length ?? 0} clients
