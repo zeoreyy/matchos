@@ -346,8 +346,7 @@ export function InsuranceMap({
         </section>
       )}
 
-        </section>
-      </div>
+
 
       {/* Missing info */}
       <section>
